@@ -35,7 +35,7 @@ function createList(arr){
         count++;
         // console.log(count);
     }
-    console.log(newArr);
+    // console.log(newArr);
     return newArr
 }
 function columnShuffle(colArr, str){
@@ -54,14 +54,15 @@ function shuffle(){
         board[i] = columnShuffle(colArr, startBoard[rowArr[i]]);
         solution[i] = columnShuffle(colArr, startSolution[rowArr[i]]);
     }
-    console.log(board);
-    console.log(solution);
+    // console.log(board);
+    // console.log(solution);
 }
 shuffle();
 
 // code to make show board on browser and add event listener
 let selectedNumber = null;
 let err =0;
+let timerId = null;
 const grid = document.querySelector('.grid');
 const number = document.querySelector('.number');
 
@@ -105,6 +106,11 @@ let createBoard = ()=>{
         number.append(div);
     }
     document.querySelector('h3 > span').innerText = err;
+
+    if(timerId)
+        clearInterval(timerId);
+
+    setTimer(new Date().getTime());
 }
 
 
@@ -129,13 +135,39 @@ function clickDigit(){
     }
 }
 
-createBoard();
+
+const level = document.querySelector('select');
+level.addEventListener('change', ()=>{
+    newQuestion();
+})
+
+
+//setting timer feature
+const timer = document.querySelector('.nav > h2');
+const setTimer = (startTime)=>{
+    timerId = setInterval(()=>{
+        let time = Math.floor(((new Date().getTime()) - startTime)/1000);
+        let hour = Math.floor((time/3600)%24);
+        hour = (hour<10)? "0"+hour : hour;
+        let minute = Math.floor((time/60)%60);
+        minute = (minute < 10)? "0"+minute : minute;
+        let second = Math.floor(time%60);
+        second = (second < 10)? "0"+second : second;
+        // console.log(hour, minute, second);
+        // console.log(time)
+        timer.innerText = `${hour}:${minute}:${second}`
+        
+    },1000)
+}
+
+
 
 function newQuestion(){
     shuffle();
     grid.innerText = "";
     number.innerText = "";
     createBoard();
+    
 }
 
 function solutionFun(){
@@ -146,3 +178,8 @@ function solutionFun(){
         }
     }
 }
+
+
+createBoard();
+
+
