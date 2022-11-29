@@ -63,8 +63,10 @@ shuffle();
 let selectedNumber = null;
 let err =0;
 let timerId = null;
+let percentage = 0;
 const grid = document.querySelector('.grid');
 const number = document.querySelector('.number');
+const complete = document.querySelector('.complete');
 
 let createBoard = ()=>{
     for(let i=0; i<9; i++){
@@ -109,8 +111,10 @@ let createBoard = ()=>{
 
     if(timerId)
         clearInterval(timerId);
-
     setTimer(new Date().getTime());
+
+    percentage = 43;
+    complete.style.width = `${percentage}%`;
 }
 
 
@@ -129,6 +133,9 @@ function clickDigit(){
     const j = Number(temp[1]);
     if(selectedNumber.innerText === solution[i][j]){
         this.innerText = selectedNumber.innerText;
+
+        percentage += 1.24;
+        complete.style.width = `${percentage}%`;
     }else{
         err++;
         document.querySelector('h3 > span').innerText = err;
@@ -177,6 +184,9 @@ function solutionFun(){
             document.getElementById(`${i},${j}`).innerText = solution[i][j];
         }
     }
+    clearInterval(timerId);
+
+    complete.style.width = `${100}%`;
 }
 
 
