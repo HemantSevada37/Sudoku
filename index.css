@@ -118,14 +118,19 @@ button {
     text-transform: uppercase;
     font-size: 15px;
     padding: 8px 10px;
-    /* background-color: #2faaff; */
-    background-color: #45bd21;
+    /* background-color: #45bd21; */
     border-radius: 20px;
-    color: #fff;
+    color: #45bd21;
     margin: 5px 20px;
     width: 150px;
-    border: 1px solid #000;
+    border: 1px solid #45bd21;
+    /* border: none; */
 }
+button:hover {
+    background-color: #45bd21;
+    color: #fff;
+}
+
 
 @media screen and (max-width: 600px) {
     .container, .grid, .number {
@@ -135,5 +140,11 @@ button {
     .grid > div, .number > div {
         width: 10vw;
         height : 8vw;
+    }
+    .nav {
+        justify-content: space-between;
+    }
+    select {
+        background-color: transparent;
     }
 }

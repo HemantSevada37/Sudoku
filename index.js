@@ -173,6 +173,7 @@ function newQuestion(){
     shuffle();
     grid.innerText = "";
     number.innerText = "";
+    err=0;
     createBoard();
     
 }
